@@ -19,6 +19,7 @@ pair<int, int> vv[100001];
 
 int main(int argc, char** argv)
 {
+	cin.tie(0);
 	int T;
 	cin >> T;
 	for (int tt = 0; tt < T; tt++)
