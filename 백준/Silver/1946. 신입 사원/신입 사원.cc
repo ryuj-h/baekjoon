@@ -7,14 +7,6 @@
 
 using namespace std;
 
-bool ssort(std::pair<int, int> a, std::pair<int, int> b)
-{
-	if (a.first < b.first)
-		return true;
-	else 
-		return false;
-}
-
 pair<int, int> vv[100001];
 
 int main(int argc, char** argv)
@@ -29,7 +21,7 @@ int main(int argc, char** argv)
 		for (int nn = 0; nn < N; nn++)
 			cin >> vv[nn].first >> vv[nn].second;	
 
-		sort(vv, vv + N, ssort);
+		sort(vv, vv + N);
 
 		int count = 1;
 		int startb = vv[0].second;
@@ -41,7 +33,7 @@ int main(int argc, char** argv)
 				startb = vv[i].second;
 			}
 		}
-		cout << count << endl;
+		cout << count <<"\n";
 	}
 	return 0;//정상종료시 반드시 0을 리턴해야합니다.
 }
