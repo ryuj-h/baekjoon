@@ -2,16 +2,14 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <cstring>
-
 
 
 using namespace std;
 
 int g_N;
-bool g_visit[201];
+vector<bool> g_visit;
 
-void bfs(int index,vector<vector<int>> computers)
+void bfs(int index,const vector<vector<int>> computers)
 {
     queue<int> q;
     g_visit[index] = true;
@@ -37,7 +35,7 @@ void bfs(int index,vector<vector<int>> computers)
 int solution(int n, vector<vector<int>> computers) {
     int answer = 0;
     g_N = n;
-    memset(g_visit, false,sizeof(g_visit));
+    g_visit.resize(g_N);
     
     for(int i= 0;i<g_N;i++)
     {
