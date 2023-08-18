@@ -1,4 +1,4 @@
-# [Gold IV] 캐슬 디펜스 - 17135 
+# [Gold III] 캐슬 디펜스 - 17135 
 
 [문제 링크](https://www.acmicpc.net/problem/17135) 
 
@@ -8,7 +8,7 @@
 
 ### 분류
 
-브루트포스 알고리즘(bruteforcing), 그래프 이론(graphs), 구현(implementation), 시뮬레이션(simulation)
+너비 우선 탐색, 브루트포스 알고리즘, 그래프 이론, 그래프 탐색, 구현, 시뮬레이션
 
 ### 문제 설명
 
