@@ -9,11 +9,10 @@ import java.util.StringTokenizer;
 public class Main {
 	static int N,K;
 	static int Solution;
-	static boolean visit[] = new boolean[400001];
+	static boolean visit[] = new boolean[100001];
 	
 	public static void bfs() {
 		Queue <int[]> que = new LinkedList<int[]>();
-		
 		que.offer(new int[] {N,0});
 		
 		while(!que.isEmpty()) {
@@ -26,20 +25,20 @@ public class Main {
 				System.out.println(Solution);
 				System.exit(0);
 			}
-
 			
-			if (visit[currnb + 1] == false){
-				visit[currnb + 1] = true;
-				que.offer(new int[] { currnb + 1,currturn + 1 });
-			}
+            if (currnb + 1 <= 100000){
+                if (visit[currnb + 1] == false){
+                    visit[currnb + 1] = true;
+                    que.offer(new int[] { currnb + 1,currturn + 1 });
+                }
+            }
 			if (currnb - 1 >= 0){
 				if (visit[currnb - 1] == false)	{
 					visit[currnb - 1] = true;
 					que.offer(new int[] { currnb - 1,currturn + 1 });
 				}
 			}
-			if (currnb * 2 - K <= K - currnb)
-			{
+			if (currnb * 2 <= 100000) {
 				if (visit[currnb * 2] == false)	{
 					visit[currnb * 2] = true;
 					que.offer(new int[] { currnb * 2,currturn + 1 });
