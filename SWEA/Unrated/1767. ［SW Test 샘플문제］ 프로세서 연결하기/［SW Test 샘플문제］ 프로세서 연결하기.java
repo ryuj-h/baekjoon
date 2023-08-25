@@ -13,9 +13,6 @@ import java.util.StringTokenizer;
  * 풀이 방식
  * Core 라는 노드를 만들어서, 이 노드가 연결 된경우 , 안 된 경우를 나누어서 방향을 나누면서 
  * dfs탐색을 돌린다.
- * 
- * 
- * 
  * @author SSAFY
  *
  */
@@ -29,40 +26,22 @@ public class Solution {
 	static int T;
 	static int N;
 	static int Map[][];
-	static int SaveMap[][];
 	static int corenum;
 	static int dx[] = {-1,1,0,0};//좌 상 우 하
 	static int dy[] = {0,0,-1,1};
 	static int Solution;
 	static int SolutionDist;
-	
 	static Core core[];
 	
-	public static int [][] copy(int [][] copymap) {
-		int retmap[][] = new int [N][N];
-		for(int y= 0;y<N;y++) {
-			for(int x= 0; x< N;x++) {
-				retmap[y][x] = copymap[y][x];
-			}
-		}
-		return retmap;
-	}public static void pirntmap(int [][] copymap) {
-		for(int y= 0;y<N;y++) {
-			for(int x= 0; x< N;x++) {
-				
-				if (copymap[y][x] == -1)
-					System.out.printf("■ ");
-				else
-					System.out.printf("□ ");
-					
-			}
-			System.out.println();
-		}
-
-		System.out.println();
-		
-	}
 	
+	/**
+	 * 현재 방향 대로 코어와 전선을 연결하며 재귀 호출로 총 연결된 길이를 return
+	 * 
+	 * @param dir
+	 * @param currx
+	 * @param curry
+	 * @return 연결된 길이
+	 */
 	public static int Connect(int dir, int currx,int curry) {
 		if (currx < 0 || currx >= N || curry < 0 || curry >= N)
 			return 1;
@@ -77,6 +56,14 @@ public class Solution {
 			return 0;
 	}
 	
+	
+	/**
+	 * 
+	 * 전선이 지나갔던 자리를 원상복구
+	 * @param dir
+	 * @param currx
+	 * @param curry
+	 */
 	public static void DisConnect(int dir, int currx, int curry) {
 		if (currx < 0 || currx >= N || curry < 0 || curry >= N)
 			return;
@@ -85,21 +72,29 @@ public class Solution {
 	}
 
 	
+	/**
+	 * dfs
+	 * 
+	 * @param index 현재 인덱스
+	 * @param connectednum 연결된 코어의 수
+	 * @param connectedline 총 연결된 전선의 길이
+	 */
 	public static void dfs(int index, int connectednum, int connectedline) {
 		
+		//우선순위에 맞춰서 연결된 길이를 설정해줌
 		if (Solution < connectednum) {
 			Solution = connectednum;	
 			SolutionDist = connectedline;
-			//pirntmap(Map);
 		}
 		else if ( Solution == connectednum) {
 			SolutionDist = Math.min(SolutionDist, connectedline);
-			//pirntmap(Map);
 		}
 		
 		if (index == corenum) {
 			return;
 		}
+		
+		//4방 돌면서 연결해보고 dfs 시도
 		for(int d = 0; d < 4; d++) {
 			int conect = Connect(d,core[index].x + dx[d],core[index].y + dy[d]);
 			if ( conect > 0) {
@@ -107,6 +102,7 @@ public class Solution {
 				DisConnect(d,core[index].x+ dx[d],core[index].y+ dy[d]);	
 			}	
 		}
+		//또한 아무것도 연결하지 않고도 dfs 시도
 		dfs(index+1, connectednum,connectedline );
 	}
 	
@@ -118,7 +114,6 @@ public class Solution {
 		for(int tc = 1; tc <= T;tc++) {
 			N = Integer.parseInt(br.readLine());
 			Map = new int[N][N];
-			SaveMap = new int [N][N];
 			Solution = Integer.MIN_VALUE;
 			SolutionDist = Integer.MAX_VALUE;
 			corenum = 0;
